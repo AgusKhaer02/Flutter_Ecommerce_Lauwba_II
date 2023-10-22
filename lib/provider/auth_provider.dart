@@ -11,8 +11,10 @@ const PASSWORD = "password";
 class AuthProvider with ChangeNotifier {
   bool isLoggedIn = false;
   bool isLoading = false;
-  late int userID;
-  late String username, email, fullname;
+  int userID = 0;
+  String username = "";
+  String email = "";
+  String fullname = "";
   SharedPreferences? _pref;
 
   checkLoggedIn() async {
@@ -22,6 +24,7 @@ class AuthProvider with ChangeNotifier {
     bool email = _pref!.containsKey(EMAIL);
     if (userID && email && fullname) {
       isLoggedIn = true;
+
       notifyListeners();
     } else {
       isLoggedIn = false;
@@ -58,6 +61,7 @@ class AuthProvider with ChangeNotifier {
       userID = _pref!.getInt(USERID)!;
       fullname = _pref!.getString(FULLNAME)!;
       email = _pref!.getString(EMAIL)!;
+      notifyListeners();
     }
   }
 

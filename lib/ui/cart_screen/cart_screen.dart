@@ -3,6 +3,7 @@ import 'package:ecommerce_lauwba_new/provider/cart_provider.dart';
 import 'package:ecommerce_lauwba_new/ui/detail_product/detail_product_screen.dart';
 import 'package:ecommerce_lauwba_new/ui/global_widgets.dart';
 import 'package:ecommerce_lauwba_new/utils/page_routes.dart';
+import 'package:ecommerce_lauwba_new/utils/send_to_wa.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,6 +17,7 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
   CartProvider cartProvider = CartProvider();
   AuthProvider authProvider = AuthProvider();
+  TextEditingController note = TextEditingController();
 
   @override
   void initState() {
@@ -128,7 +130,7 @@ class _CartScreenState extends State<CartScreen> {
             ],
           ),
         ),
-        bottomNavigationBar: Container(
+        bottomSheet: Container(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -137,6 +139,7 @@ class _CartScreenState extends State<CartScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: TextFormField(
                   maxLines: 2,
+                  controller : note,
                   decoration: const InputDecoration(
                       hintText: "Add a nore here...",
                       border: OutlineInputBorder()),
@@ -147,7 +150,19 @@ class _CartScreenState extends State<CartScreen> {
                 margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    List<Map<String, dynamic>> listCart = [];
+                    for (var cartItem in provider.listCart) {
+                      listCart.add({
+                        "product_name" : cartItem.product!.productName,
+                        "quantity" : cartItem.quantity,
+                      });
+                    }
+
+                    final message = buildMessage(data: listCart, note: note.text);
+                    sendWa(message: message);
+
+                  },
                   child: const Text("Checkout"),
                 ),
               ) : Container(
@@ -161,6 +176,7 @@ class _CartScreenState extends State<CartScreen> {
             ],
           ),
         ),
+        resizeToAvoidBottomInset: true,
       );
     });
   }

@@ -45,6 +45,7 @@ class _MainScreenState extends State<MainScreen> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       authProvider = Provider.of<AuthProvider>(context,listen: false);
       authProvider.checkLoggedIn();
+      authProvider.getPref();
     });
     super.initState();
   }

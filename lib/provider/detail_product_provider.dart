@@ -26,7 +26,6 @@ class DetailProductProvider with ChangeNotifier{
       productDetail = value.data!;
       notifyListeners();
     }).catchError((err){
-      print("ERR : $err");
       isLoading = false;
       error = "Masalah pada jaringan, silahkan coba lagi!";
       notifyListeners();

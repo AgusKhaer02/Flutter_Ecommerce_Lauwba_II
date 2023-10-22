@@ -42,6 +42,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               Padding(
                 padding: const EdgeInsets.all(2),
+                child: Text("#${provider.userID}",
+                    style: Theme.of(context).textTheme.titleLarge),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(2),
                 child: Text(provider.fullname,
                     style: Theme.of(context).textTheme.titleLarge),
               ),

@@ -1,6 +1,6 @@
 /// success : true
 /// message : "Data berhasil ditambahkan"
-/// data : {"user_id":"2","product_id":"4","quantity":1,"updated_at":"2023-10-21T14:29:55.000000Z","created_at":"2023-10-21T14:29:55.000000Z","cart_id":4}
+/// data : {"user_id":"2","product_id":"4","quantity":"5","updated_at":"2023-10-22T07:56:06.000000Z","created_at":"2023-10-22T07:56:06.000000Z","cart_id":18}
 
 class AddCart {
   AddCart({
@@ -39,16 +39,16 @@ class AddCart {
 
 /// user_id : "2"
 /// product_id : "4"
-/// quantity : 1
-/// updated_at : "2023-10-21T14:29:55.000000Z"
-/// created_at : "2023-10-21T14:29:55.000000Z"
-/// cart_id : 4
+/// quantity : "5"
+/// updated_at : "2023-10-22T07:56:06.000000Z"
+/// created_at : "2023-10-22T07:56:06.000000Z"
+/// cart_id : 18
 
 class Data {
   Data({
       String? userId, 
       String? productId, 
-      int? quantity, 
+      String? quantity, 
       String? updatedAt, 
       String? createdAt, 
       int? cartId,}){
@@ -70,14 +70,14 @@ class Data {
   }
   String? _userId;
   String? _productId;
-  int? _quantity;
+  String? _quantity;
   String? _updatedAt;
   String? _createdAt;
   int? _cartId;
 
   String? get userId => _userId;
   String? get productId => _productId;
-  int? get quantity => _quantity;
+  String? get quantity => _quantity;
   String? get updatedAt => _updatedAt;
   String? get createdAt => _createdAt;
   int? get cartId => _cartId;

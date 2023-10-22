@@ -55,7 +55,6 @@ class Api {
     var url = "${BASE_URL}product/$idProduct";
     final response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
-      print(response.body);
       return ProductDetail.fromJson(jsonDecode(response.body));
     }
 
@@ -131,7 +130,6 @@ class Api {
   static Future<AddCart> addNewCart({required Map<String, dynamic> dataCart}) async {
     var url = "${BASE_URL}cart-add";
     final response = await http.post(Uri.parse(url), body: dataCart);
-
     if (response.statusCode == 200) {
       return AddCart.fromJson(jsonDecode(response.body));
     }
@@ -144,7 +142,6 @@ class Api {
     final response = await http.post(Uri.parse(url), body: {"quantity": qty.toString()});
 
     if (response.statusCode == 200) {
-      print("sukses ke aksi cartnya!!!!");
       return UpdateCart.fromJson(jsonDecode(response.body));
     }
 

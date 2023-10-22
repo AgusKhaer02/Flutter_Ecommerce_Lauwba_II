@@ -201,12 +201,30 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
   }
 }
 
-class QTYnTotal extends StatelessWidget {
+class QTYnTotal extends StatefulWidget {
+
+
+
+  @override
+  State<QTYnTotal> createState() => _QTYnTotalState();
+}
+
+class _QTYnTotalState extends State<QTYnTotal> {
+  AuthProvider auth = AuthProvider();
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      auth = Provider.of<AuthProvider>(context,listen: false);
+      auth.getPref();
+    });
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
     final product = Provider.of<DetailProductProvider>(context);
-    final auth = Provider.of<AuthProvider>(context);
+
     return Consumer<CartProvider>(builder: (context, provider, widget) {
       return Container(
         color: Colors.orange,
@@ -277,6 +295,7 @@ class QTYnTotal extends StatelessWidget {
                           )
                         : ElevatedButton(
                             onPressed: () async {
+                              print("User id : ${auth.userID}, product id : ${product.productDetail.productId}, qty : ${provider.qty}");
                               var res = await provider.addToCart(
                                   userId: auth.userID,
                                   productId: product.productDetail.productId!,
